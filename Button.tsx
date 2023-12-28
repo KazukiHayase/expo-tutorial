@@ -4,14 +4,14 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 type Props = {
   label: string;
   theme?: "primary" | "default";
+  onPress?: () => void;
 }
 
 export const Button: React.FC<Props> = ({ 
   label,
   theme = "default",
+  onPress,
 }) => {
-  const onPress = () => alert(`You pressed ${label}`);
-
   switch (theme) {
     case "primary":
       return (
