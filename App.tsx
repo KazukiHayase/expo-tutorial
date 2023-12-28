@@ -8,6 +8,7 @@ import { useState } from 'react';
 const PlaceholderImage = require('./assets/images/background-image.png');
 
 export default function App() {
+  const [showAppOptions, setShowAppOptions] = useState(false);
   const [selectedImage, setSelectedImage] = useState<ImagePickerAsset>(PlaceholderImage);
 
   const handlePickImageAsync = async () => {
@@ -27,6 +28,7 @@ export default function App() {
     }
 
     setSelectedImage(image);
+    setShowAppOptions(true);
   }
 
   return (
@@ -34,10 +36,14 @@ export default function App() {
       <View style={styles.imageContainer}>
         <ImageViewer source={selectedImage} />
       </View>
-      <View style={styles.footerContainer}>
-        <Button theme='primary' label="Choose a photo" onPress={handlePickImageAsync} />
-        <Button label="Use this photo" />
-      </View>
+      {showAppOptions ? (
+        <View />
+      ) : (
+        <View style={styles.footerContainer}>
+          <Button theme='primary' label="Choose a photo" onPress={handlePickImageAsync} />
+          <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+        </View>
+      )}
       <StatusBar style="auto" />
     </View>
   );
